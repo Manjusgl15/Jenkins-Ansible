@@ -1,0 +1,44 @@
+Step-by-Step Jenkins Installation
+
+1. Update the system
+   sudo apt update && sudo apt upgrade -y
+
+2. Install Java (Jenkins needs Java)
+   sudo apt install openjdk-17-jdk -y
+
+   Check the installed Java version:
+   java -version
+
+3. Add Jenkins repository
+   curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+4. Then add the Jenkins source list:
+   echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+5. Install Jenkins
+   sudo apt update
+   sudo apt install jenkins -y
+
+6. Start and enable Jenkins
+   sudo systemctl start jenkins
+   sudo systemctl enable jenkins
+
+7. Check Jenkins status
+   sudo systemctl status jenkins
+
+8. Allow Jenkins through the firewall
+   sudo ufw allow 8080
+   sudo ufw status
+
+9. Access Jenkins Web Interface
+   Open your browser and go to: http://<your-server-ip>:8080
+
+10. Get the initial admin password
+    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Paste that password into the browser to unlock Jenkins and follow the setup wizard (install suggested plugins, create admin user, etc).
+
+
