@@ -1,0 +1,10 @@
+pipeline{
+    agent any
+    stages{
+        stage("exicute"){
+            steps{
+                ansiblePlaybook credentialsId: 'jenkins', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: '/etc/ansible/nginx.yml', vaultTmpPath: ''
+            }
+        }
+    }
+}
