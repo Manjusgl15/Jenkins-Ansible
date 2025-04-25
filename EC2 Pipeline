@@ -1,0 +1,10 @@
+pipeline{
+    agent any
+    stages{
+        stage("Create EC2"){
+            steps{
+                ansiblePlaybook credentialsId: 'jenkins', disableHostKeyChecking: true, installation: 'Ansible', playbook: '/etc/ansible/create-ec2.yml', vaultTmpPath: ''
+            }
+        }
+    }
+}
